@@ -3,7 +3,6 @@ local json = require "luci.jsonc"
 local server_section = arg[1]
 local proto = arg[2]
 local local_port = arg[3]
-local socks_port = arg[4] or "0"
 
 local server = ucursor:get_all("shadowsocksr", server_section)
 
@@ -26,7 +25,7 @@ log = {
      }
  },
  -- 同时开启 socks 代理 
- inboundDetour = (proto == "tcp" and socks_port ~= "0") and {
+ inboundDetour = (proto == "tcp") and {
    {
      protocol = "socks",
      port = 1088,
